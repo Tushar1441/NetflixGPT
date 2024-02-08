@@ -1,7 +1,10 @@
 # NetFlixGPT
-    - Create React App
+    - Create Vite@latest
     - Configured Tailwind CSS
-
+    - React-Router-Dom
+    - Header
+    - Login Form
+        - SignUp Form
 
 # Features
 
