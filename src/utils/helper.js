@@ -1,10 +1,10 @@
-export const validateData = (values) => {
+export const validateData = (values, isSignIn) => {
   const errors = {};
   const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
   const nameRegex =
     /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/;
 
-  if (!values.fullname) {
+  if (!values.fullname && !isSignIn) {
     errors.fullname = "Name is required!";
   }
   if (!values.email) {

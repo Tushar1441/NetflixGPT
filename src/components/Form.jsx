@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 import { validateData } from "../utils/helper";
 
 const Form = () => {
+  const pass = useRef("");
+
   const [signIn, setSignIn] = useState(true);
   const initialValues = {
     fullname: "",
@@ -10,6 +17,14 @@ const Form = () => {
   };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
+
+  const myFunction = () => {
+    if (pass.current.type === "text") {
+      pass.current.type = "password";
+    } else {
+      pass.current.type = "text";
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,7 +36,53 @@ const Form = () => {
   };
 
   const handleClick = () => {
-    setFormErrors(validateData(formValues));
+    const errors = validateData(formValues, signIn);
+    setFormErrors(errors);
+
+    // if Errors are present in the form then return from here.
+    if (Object.keys(errors).length !== 0) return;
+
+    // User SignUp Authentication
+    if (!signIn) {
+      createUserWithEmailAndPassword(
+        auth,
+        formValues.email,
+        formValues.password
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          setFormErrors({
+            ...formErrors,
+            errorcode: errorCode,
+            errormsg: errorMessage,
+          });
+          // ..
+        });
+    } else {
+      // else sign in the user
+      signInWithEmailAndPassword(auth, formValues.email, formValues.password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setFormErrors({
+            ...formErrors,
+            errorcode: errorCode,
+            errormsg: errorMessage,
+          });
+          console.log(errorCode);
+        });
+    }
   };
 
   return (
@@ -55,7 +116,6 @@ const Form = () => {
             </p>
           </div>
         )}
-
         <div className="w-full">
           <input
             type="email"
@@ -72,9 +132,9 @@ const Form = () => {
           />
           <p className="text-sm text-red-500 pt-1 pl-1">{formErrors.email}</p>
         </div>
-
         <div className="w-full">
           <input
+            ref={pass}
             type="password"
             name="password"
             placeholder="Password"
@@ -87,11 +147,26 @@ const Form = () => {
             value={formValues.password}
             onChange={handleChange}
           />
+          <div className="flex items-center pt-2 pl-2">
+            <input className="mt-[2px]" type="checkbox" onClick={myFunction} />
+            <span className="pl-2">Show Password</span>
+          </div>
           <p className="text-sm text-red-500 pt-1 pl-1">
             {formErrors.password}
           </p>
         </div>
-
+        {formErrors.errorcode === "auth/email-already-in-use" ? (
+          <p className="text-red-500 text-md">
+            Email already in Use. Try signing in!
+          </p>
+        ) : (
+          <p className="hidden"></p>
+        )}
+        {formErrors.errorcode === "auth/invalid-credential" ? (
+          <p className="text-red-500 text-md">Invalid Email Id or Password.</p>
+        ) : (
+          <p className="hidden"></p>
+        )}
         <button
           className="mb-6 w-full font-bold p-3 rounded-md bg-red-600"
           onClick={handleClick}
@@ -126,8 +201,8 @@ const Form = () => {
         </p>
       )}
       <p className="text-sm text-gray-400 mt-3">
-        This page is protected by Google reCAPTCHA to ensure you're not a bot.{" "}
-        <span className="text-blue-400">Learn more.</span>
+        This page is protected by Google reCAPTCHA to ensure you&apos;re not a
+        bot. <span className="text-blue-400">Learn more.</span>
       </p>
     </form>
   );
