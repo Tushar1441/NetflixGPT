@@ -7,22 +7,17 @@ const Form = () => {
   // used to toggle the show password checkbox
   const pass = useRef("");
   const [signIn, setSignIn] = useState(true);
-
   const dispatch = useDispatch();
 
-  // putting all the input field values into an object
-  // so that they can be easily managed by a single state variable
-  const initialValues = {
+  const [formValues, setFormValues] = useState({
     fullname: "",
     email: "",
     password: "",
-  };
-  const [formValues, setFormValues] = useState(initialValues);
+  });
 
-  // state variable for all the form errors produced during validation.
   const [formErrors, setFormErrors] = useState({});
 
-  // this functions toggles the type of password input field.
+  // this functions toggles the type of password input field to toggle show password.
   const myFunction = () => {
     if (pass.current.type === "text") {
       pass.current.type = "password";
@@ -31,7 +26,6 @@ const Form = () => {
     }
   };
 
-  // this function takes care of the state update of the input field variables
   const handleChange = (e) => {
     const { name, value } = e.target;
     // frst copy the previous object and then update the particular named field
@@ -42,8 +36,6 @@ const Form = () => {
     setSignIn(!signIn);
   };
 
-  //  1. Validates the form and returns any errors.
-  // 2. If no errors found then does user authentication.
   const handleClick = () => {
     const errors = validateData(formValues, signIn);
     setFormErrors(errors);

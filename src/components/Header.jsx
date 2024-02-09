@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../utils/userSlice";
+import BrowseHeader from "./BrowseHeader";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
@@ -23,8 +24,7 @@ const Header = () => {
       });
   };
 
-  // Whenever user auth-state is changed (sign-in, sign-up, sign-out)
-  // an action is dispatched to the redux store and the user details are subscribed to the store.
+  // Whenever user auth-state is changed (sign-in, sign-up, sign-out) an action is dispatched to the redux store and the user details are subscribed to the store.
   // This is also beneficial in navigating the pages after user-action.
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -51,24 +51,9 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
 
-  // if user is signed-in -->  Display the header with additional features.
   return user ? (
-    <div className="flex justify-between items-center pr-8 bg-black">
-      <div className="px-36 py-2 max-xl:px-[32px] ">
-        <img className="w-28" src={NETFLIX_LOGO} alt="logo" />
-      </div>
-
-      <div className="flex gap-4  items-center">
-        <img src={user.photoURL} alt="" className="w-12" />
-        <button
-          onClick={handleSignOut}
-          className="text-white font-bold bg-red-600 px-4 py-3 rounded"
-        >
-          Sign Out
-        </button>
-        {/* <p className="text-white">{user.displayName}</p> */}
-      </div>
-    </div>
+    // if user is signed-in -->  Display the header with additional features.
+    <BrowseHeader user={user} handleSignOut={handleSignOut} />
   ) : (
     // the user is not signed in
     <div className="px-36 py-2 max-xl:px-[32px] ">

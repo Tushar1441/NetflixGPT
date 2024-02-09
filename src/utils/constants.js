@@ -9,3 +9,11 @@ export const NETFLIX_FICON =
 
 export const USER_ICON =
   "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png?20201013161117";
+
+export const API_OPTIONS = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: import.meta.env.VITE_REACT_APP_TMDB_AUTH_TOKEN,
+  },
+};
