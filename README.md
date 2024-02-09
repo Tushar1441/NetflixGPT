@@ -1,3 +1,6 @@
+
+Visit this link - [NetFlixGPT](https://netflix-gpt-by-tushar.netlify.app/)
+
 # NetFlixGPT
 
     - Create Vite@latest
