@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
-import { userAuthentication, validateData } from "../utils/helper";
+import { validateData } from "../utils/helper";
 import { useDispatch } from "react-redux";
+import userAuthentication from "../utils/userAuthentication";
 
 const Form = () => {
   // used to toggle the show password checkbox

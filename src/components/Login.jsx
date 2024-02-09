@@ -1,4 +1,4 @@
-import { BODY_IMG } from "../utils/links";
+import { BODY_IMG } from "../utils/constants";
 import Header from "./Header";
 import Form from "./Form";
 

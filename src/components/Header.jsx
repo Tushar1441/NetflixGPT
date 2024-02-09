@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { NETFLIX_LOGO } from "../utils/links";
+import { NETFLIX_LOGO } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../utils/userSlice";
-import { USER_ICON } from "../utils/links";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
@@ -59,14 +58,15 @@ const Header = () => {
         <img className="w-28" src={NETFLIX_LOGO} alt="logo" />
       </div>
 
-      <div className="flex gap-4">
-        <img src={USER_ICON} alt="" className="w-12" />
+      <div className="flex gap-4  items-center">
+        <img src={user.photoURL} alt="" className="w-12" />
         <button
           onClick={handleSignOut}
-          className="text-white font-bold bg-red-600 px-4 rounded"
+          className="text-white font-bold bg-red-600 px-4 py-3 rounded"
         >
           Sign Out
         </button>
+        {/* <p className="text-white">{user.displayName}</p> */}
       </div>
     </div>
   ) : (
