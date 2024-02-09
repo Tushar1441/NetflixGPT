@@ -28,7 +28,7 @@ const Header = () => {
   // an action is dispatched to the redux store and the user details are subscribed to the store.
   // This is also beneficial in navigating the pages after user-action.
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed-in or signs-up
         const { uid, email, displayName, photoURL } = user;
@@ -47,6 +47,9 @@ const Header = () => {
         navigate("/");
       }
     });
+
+    // this will unsubscribe to the onAuthStateChange after the header component unmounts
+    return () => unsubscribe();
   }, []);
 
   // if user is signed-in -->  Display the header with additional features.
@@ -58,7 +61,10 @@ const Header = () => {
 
       <div className="flex gap-4">
         <img src={USER_ICON} alt="" className="w-12" />
-        <button onClick={handleSignOut} className="text-white font-bold bg-red-600 px-4 rounded">
+        <button
+          onClick={handleSignOut}
+          className="text-white font-bold bg-red-600 px-4 rounded"
+        >
           Sign Out
         </button>
       </div>

@@ -16,6 +16,7 @@
     - Update Profile
     - BugFix: Sign up user displayName and profile picture update
     - BugFix: if the user is not logged in Redirect/browse to login page and vice versa
+    - Unsubscribed onAuthStateChanged after the header component unmounts
 
 # Features
 
