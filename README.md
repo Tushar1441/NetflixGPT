@@ -5,6 +5,10 @@
     - Header
     - Login Form
         - SignUp Form
+        - Form Validation
+    - Firebase Setup
+    - Deploying our app onto production
+    - Create SignUp User Account
 
 # Features
 
