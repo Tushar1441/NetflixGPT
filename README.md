@@ -1,4 +1,5 @@
 # NetFlixGPT
+
     - Create Vite@latest
     - Configured Tailwind CSS
     - React-Router-Dom
@@ -11,20 +12,25 @@
     - Create SignUp User Account
     - Implemented Sign In User API
     - Created Redux Store with userSlice
+    - Implemented Sign Out
+    - Update Profile
+    - BugFix: Sign up user displayName and profile picture update
+    - BugFix: if the user is not logged in Redirect/browse to login page and vice versa
 
 # Features
 
 - Sign-In/Sign-Up Form
-    - redirect to browse page
+
+  - redirect to browse page
 
 - Browse (After Authentication)
-    - Header
-    - Main Movie
-        - Trailer in Background
-        - Title in Description
-        - Buttons
-    - Movies Categories
-        - Movies List    
+  - Header
+  - Main Movie
+    - Trailer in Background
+    - Title in Description
+    - Buttons
+  - Movies Categories
+    - Movies List
 - NetFlixGPT
-    - Search Bar
-    - Movie Suggestion
+  - Search Bar
+  - Movie Suggestion

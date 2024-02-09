@@ -1,21 +1,13 @@
 import { useRef, useState } from "react";
-import { validateData } from "../utils/helper";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
-import { auth } from "../utils/firebase";
+import { userAuthentication, validateData } from "../utils/helper";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addUser } from "../utils/userSlice";
 
 const Form = () => {
   // used to toggle the show password checkbox
   const pass = useRef("");
   const [signIn, setSignIn] = useState(true);
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   // putting all the input field values into an object
   // so that they can be easily managed by a single state variable
@@ -58,44 +50,8 @@ const Form = () => {
     // if Errors are present in the form then return from here.
     if (Object.keys(errors).length !== 0) return;
 
-    if (!signIn) {
-      createUserWithEmailAndPassword(
-        auth,
-        formValues.email,
-        formValues.password
-      )
-        .then((userCredential) => {
-          // Signed up
-          const user = userCredential.user;
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-
-          setFormErrors({
-            ...formErrors,
-            errorcode: errorCode,
-            errormsg: errorMessage,
-          });
-        });
-    } else {
-      // else sign in the user
-      signInWithEmailAndPassword(auth, formValues.email, formValues.password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setFormErrors({
-            ...formErrors,
-            errorcode: errorCode,
-            errormsg: errorMessage,
-          });
-          console.log(errorCode);
-        });
-    }
+    // user authentication will be done after form validation
+    userAuthentication(signIn, formValues, setFormErrors, formErrors, dispatch);
   };
 
   return (
@@ -218,6 +174,7 @@ const Form = () => {
           </span>
         </p>
       )}
+
       <p className="text-sm text-gray-400 mt-3">
         This page is protected by Google reCAPTCHA to ensure you&apos;re not a
         bot. <span className="text-blue-400">Learn more.</span>
