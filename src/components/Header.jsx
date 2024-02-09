@@ -1,5 +1,4 @@
 import { NETFLIX_LOGO } from "../utils/links";
-import React from "react";
 
 const Header = () => {
   return (

@@ -1,3 +1,5 @@
+
+
 export const validateData = (values, isSignIn) => {
   const errors = {};
   const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
@@ -30,3 +32,4 @@ export const validateData = (values, isSignIn) => {
 
   return errors;
 };
+

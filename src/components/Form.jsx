@@ -1,23 +1,35 @@
 import { useRef, useState } from "react";
+import { validateData } from "../utils/helper";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { validateData } from "../utils/helper";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addUser } from "../utils/userSlice";
 
 const Form = () => {
+  // used to toggle the show password checkbox
   const pass = useRef("");
-
   const [signIn, setSignIn] = useState(true);
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
+
+  // putting all the input field values into an object
+  // so that they can be easily managed by a single state variable
   const initialValues = {
     fullname: "",
     email: "",
     password: "",
   };
   const [formValues, setFormValues] = useState(initialValues);
+
+  // state variable for all the form errors produced during validation.
   const [formErrors, setFormErrors] = useState({});
 
+  // this functions toggles the type of password input field.
   const myFunction = () => {
     if (pass.current.type === "text") {
       pass.current.type = "password";
@@ -26,8 +38,10 @@ const Form = () => {
     }
   };
 
+  // this function takes care of the state update of the input field variables
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // frst copy the previous object and then update the particular named field
     setFormValues({ ...formValues, [name]: value });
   };
 
@@ -35,6 +49,8 @@ const Form = () => {
     setSignIn(!signIn);
   };
 
+  //  1. Validates the form and returns any errors.
+  // 2. If no errors found then does user authentication.
   const handleClick = () => {
     const errors = validateData(formValues, signIn);
     setFormErrors(errors);
@@ -42,7 +58,6 @@ const Form = () => {
     // if Errors are present in the form then return from here.
     if (Object.keys(errors).length !== 0) return;
 
-    // User SignUp Authentication
     if (!signIn) {
       createUserWithEmailAndPassword(
         auth,
@@ -52,7 +67,6 @@ const Form = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -63,7 +77,6 @@ const Form = () => {
             errorcode: errorCode,
             errormsg: errorMessage,
           });
-          // ..
         });
     } else {
       // else sign in the user
@@ -155,18 +168,23 @@ const Form = () => {
             {formErrors.password}
           </p>
         </div>
-        {formErrors.errorcode === "auth/email-already-in-use" ? (
-          <p className="text-red-500 text-md">
-            Email already in Use. Try signing in!
-          </p>
-        ) : (
-          <p className="hidden"></p>
-        )}
-        {formErrors.errorcode === "auth/invalid-credential" ? (
-          <p className="text-red-500 text-md">Invalid Email Id or Password.</p>
-        ) : (
-          <p className="hidden"></p>
-        )}
+        <div className="">
+          {formErrors.errorcode === "auth/email-already-in-use" ? (
+            <p className="text-red-500 text-md ">
+              Email already in Use. Try signing in!
+            </p>
+          ) : (
+            <p className="hidden"></p>
+          )}
+          {formErrors.errorcode === "auth/invalid-credential" ? (
+            <p className="text-red-500 text-md">
+              Invalid Email Id or Password.
+            </p>
+          ) : (
+            <p className="hidden"></p>
+          )}
+        </div>
+
         <button
           className="mb-6 w-full font-bold p-3 rounded-md bg-red-600"
           onClick={handleClick}
