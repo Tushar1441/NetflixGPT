@@ -3,7 +3,7 @@ import VideoBackground from "./VideoBackground";
 import VideoTitle from "./VideoTitle";
 
 const HeroSection = () => {
-  const movies = useSelector((store) => store.movies?.topRatedMovies);
+  const movies = useSelector((store) => store.movies?.popularMovies);
   if (!movies) return;
 
   const topMovie = movies[0];

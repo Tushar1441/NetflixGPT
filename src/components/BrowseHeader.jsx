@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const BrowseHeader = ({ user, handleSignOut }) => {
   return (
-    <div className="flex items-center bg-black text-white">
+    <div className="fixed z-50 left-0 right-0 flex items-center bg-black text-white">
       <div className="w-2/12 flex justify-center">
         <img className="w-32 py-2" src={NETFLIX_LOGO} alt="logo" />
       </div>

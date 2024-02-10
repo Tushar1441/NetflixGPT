@@ -17,3 +17,6 @@ export const API_OPTIONS = {
     Authorization: import.meta.env.VITE_REACT_APP_TMDB_AUTH_TOKEN,
   },
 };
+
+export const IMG_CDN_URL =
+  "https://image.tmdb.org/t/p/w500";
