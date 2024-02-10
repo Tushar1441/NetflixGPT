@@ -7,7 +7,7 @@ const Browse = () => {
   useTopRatedMovies();
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <Header />
       <HeroSection />
       <SecondaryContainer />

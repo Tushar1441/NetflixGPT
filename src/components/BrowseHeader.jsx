@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 
 const BrowseHeader = ({ user, handleSignOut }) => {
   return (
-    <div className="sticky flex items-center pr-8 bg-black text-white">
+    <div className="flex items-center bg-black text-white">
       <div className="w-2/12 flex justify-center">
         <img className="w-32 py-2" src={NETFLIX_LOGO} alt="logo" />
       </div>
-      <nav className="w-8/12">
+
+      <nav className="w-8/12 max-[1200px]:hidden">
         <ul className="flex gap-6 text-gray-300 text-[16px]">
           <li className="active:font-bold ">
             <Link>Home</Link>
@@ -30,7 +31,7 @@ const BrowseHeader = ({ user, handleSignOut }) => {
         </ul>
       </nav>
 
-      <div className="flex gap-4  items-center">
+      <div className="w-2/12 max-[1200px]:w-10/12 flex gap-4 justify-end pr-8 items-center">
         <img src={user.photoURL} alt="" className="w-[36px]" />
         <button
           onClick={handleSignOut}
