@@ -1,18 +1,28 @@
+import { useSelector } from "react-redux";
 import { IMG_CDN_URL } from "../utils/constants";
 
-const MovieCard = ({ posterPath, index }) => {
+const MovieCard = ({ posterPath, title }) => {
+  const gptToggle = useSelector((store) => store.movieMatch?.gptToggle);
+
   if (!posterPath) return null;
   return (
-    <figure className="relative overflow-hidden w-48 transition-all duration-300 cursor-pointer border border-white hover:scale-105">
-      <a href="#">
-        <img className="" src={IMG_CDN_URL + posterPath} alt="Movie Card" />
-        <div className="absolute bg-black inset-0 opacity-20"></div>
-      </a>
-      <figcaption className="absolute left-[-6px] bottom-[-48px] text-[144px] font-bold text-white">
-        <p>{index + 1}</p>
-      </figcaption>
-    </figure>
+    <div className="flex flex-col w-48">
+      <div className="w-48 cursor-pointer border border-white ">
+        <img
+          className="h-full"
+          src={IMG_CDN_URL + posterPath}
+          alt="Movie Card"
+        />
+      </div>
+      {gptToggle && (
+        <h1 className="bg-black text-xl font-semibold p-2">{title}</h1>
+      )}
+    </div>
   );
 };
 
 export default MovieCard;
+
+/***
+ * transition-all duration-300 hover:scale-105 hover:border-none
+ */

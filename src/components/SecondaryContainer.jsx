@@ -5,12 +5,17 @@ const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
 
   return (
-    <div className=" mt-0 2xl:-mt-[400px]  pl-4 md:pl-12 relative z-20">
+    <div className=" mt-0 2xl:-mt-[240px]  pl-4 relative z-20">
+      <MoviesList title={"Popular Movies"} movies={movies.popularMovies} />
+
       <MoviesList
-        title={"Now Trending Movies"}
+        title={"Trending Now Movies"}
+        movies={movies.trendingNowMovies}
+      />
+      <MoviesList
+        title={"Now Playing Movies"}
         movies={movies.nowPlayingMovies}
       />
-      <MoviesList title={"Popular Movies"} movies={movies.popularMovies} />
       <MoviesList title={"Top Rated Movies"} movies={movies.topRatedMovies} />
       <MoviesList
         title={"Physcological Thriller Movies"}
@@ -20,7 +25,6 @@ const SecondaryContainer = () => {
         title={"Cult Classic Movies"}
         movies={movies.topRatedMovies}
       />
-      <MoviesList title={"Scientific Exploration Movie"} movies={movies.topRatedMovies} />
       <MoviesList title={"Feel Good Movies"} movies={movies.topRatedMovies} />
     </div>
   );

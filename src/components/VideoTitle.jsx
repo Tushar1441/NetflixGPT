@@ -2,10 +2,10 @@ import { PLAY_ICON, INFO_ICON } from "../utils/icons";
 
 const VideoTitle = ({ title, overview }) => {
   return (
-    <div className="absolute w-screen aspect-video 2xl:pt-48 max-2xl:pt-32 pl-20 text-white bg-gradient-to-r from-black">
-      <div className="w-4/12 max-[900px]:w-8/12">
-        <h1 className="font-bold leading-tight text-6xl">{title}</h1>
-        <p className="max-[920px]:hidden mt-5 text-[16px]">{overview}</p>
+    <div className="absolute w-screen h-screen aspect-video pt-56 pl-20 max-[900px]:pl-8 max-[900px]:pt-32 text-white bg-gradient-to-r from-black">
+      <div className="w-4/12 max-[900px]:w-8/12 text-nowrap">
+        <h1 className="font-bold leading-tight text-6xl max-[900px]:text-3xl">{title}</h1>
+        <p className="overflow-hidden text-wrap mt-5 text-[16px] max-[900px]:text-sm">{overview}</p>
 
         <div className="flex items-center mt-8">
           <button className="px-6 py-2 mr-4 bg-white text-black text-xl font-bold flex items-center rounded-[4px] hover:bg-opacity-60 transition-opacity ">

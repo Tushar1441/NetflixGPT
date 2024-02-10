@@ -1,6 +1,6 @@
 import { BODY_IMG } from "../utils/constants";
 import Header from "./Header";
-import Form from "./Form";
+import LoginForm from "./LoginForm";
 
 const Login = () => {
   return (
@@ -11,7 +11,7 @@ const Login = () => {
       </div>
       <div className="absolute inset-0 z-50 max-[600px]:bg-black max-[600px]:h-full">
         <Header />
-        <Form />
+        <LoginForm />
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { validateData } from "../utils/helper";
 import { useDispatch } from "react-redux";
 import userAuthentication from "../utils/userAuthentication";
 
-const Form = () => {
+const LoginForm = () => {
   // used to toggle the show password checkbox
   const pass = useRef("");
   const [signIn, setSignIn] = useState(true);
@@ -176,4 +176,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default LoginForm;

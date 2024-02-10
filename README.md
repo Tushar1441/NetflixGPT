@@ -1,4 +1,3 @@
-
 Visit this link - [NetFlixGPT](https://netflix-gpt-by-tushar.netlify.app/)
 
 # NetFlixGPT
@@ -28,6 +27,18 @@ Visit this link - [NetFlixGPT](https://netflix-gpt-by-tushar.netlify.app/)
     - Fetch Data for Trailer Videos
     - Update Store with Trailer Video Data
     - Embedded the Youtube video with the key value from the trailer data
+    - Added MovieMatch AI Feature Button Powered by OpenAi API
+    - Created a GptSlice in the Redux Store to store all the ai feature related information
+    - Cofigured the Button Toggle to Redux Store
+    - Developed and Styled the MovieMatch AI Search Page
+    - Imported OpenAI API Key to the Project
+    - Installed and Configured openAi package in the project
+    - Prepared a query to send request to OpenAi
+    - Stored the results and Sent it to the tmdb API to fetch the movies details
+    - Stored the moviesResults in the Redux Store
+    - Subscribed to the store to get movieResults in the suggestion list component
+    - Developed and styled the suggestion list component.
+    - Made the website Responsive
 
 # Features
 
@@ -37,12 +48,25 @@ Visit this link - [NetFlixGPT](https://netflix-gpt-by-tushar.netlify.app/)
 
 - Browse (After Authentication)
   - Header
-  - Main Movie
-    - Trailer in Background
-    - Title in Description
-    - Buttons
-  - Movies Categories
-    - Movies List
-- NetFlixGPT
-  - Search Bar
-  - Movie Suggestion
+    - MovieMatch AI
+      - Search Bar
+      - Movie Suggestion List
+    - Movies
+      - Hero Section
+        - Trailer in Background
+        - Title in Description
+        - Buttons
+      - Secondary Container
+        - Movies/TV Shows List
+          - 20 Cards
+    - TV Shows
+        - Hero Section
+          - Trailer in Background
+          - Title in Description
+          - Buttons
+        - Secondary Container
+          - Movies/TV Shows List
+          - 20 Cards
+    - Language
+    - Sign Out
+
