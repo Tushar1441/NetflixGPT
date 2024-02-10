@@ -43,7 +43,6 @@ Visit this link - [NetFlixGPT](https://netflix-gpt-by-tushar.netlify.app/)
 # Features
 
 - Sign-In/Sign-Up Form
-
   - redirect to browse page
 
 - Browse (After Authentication)
