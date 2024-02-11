@@ -1,23 +1,21 @@
 import { getAuth } from "firebase/auth";
 
 // Import the functions you need from the SDKs you need
-import { initializeApp, setLogLevel } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
-const apiKeyValue = import.meta.env.VITE_REACT_APP_API_KEY;
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_REACT_APP_API_KEY,
-  authDomain: "netflix-gpt-ffa58.firebaseapp.com",
-  projectId: "netflix-gpt-ffa58",
-  storageBucket: "netflix-gpt-ffa58.appspot.com",
-  messagingSenderId: "516872593010",
-  appId: "1:516872593010:web:f65e3cd823bc5d4bea2ceb",
-  measurementId: "G-4EY3DN4LKK",
+  authDomain: "netflix-gpt-tushar.firebaseapp.com",
+  projectId: "netflix-gpt-tushar",
+  storageBucket: "netflix-gpt-tushar.appspot.com",
+  messagingSenderId: "1087818299647",
+  appId: "1:1087818299647:web:642e8f7a513774d756f4ca",
+  measurementId: "G-NS8B1GEGQ9",
 };
 
 // Initialize Firebase
