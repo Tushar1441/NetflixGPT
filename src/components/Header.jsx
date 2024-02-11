@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { NETFLIX_LOGO } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signInAnonymously, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../utils/userSlice";
 import BrowseHeader from "./BrowseHeader";
+import { log } from "har-validator";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
@@ -17,6 +18,8 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        dispatch(removeUser());
+        navigate("/");
       })
       .catch((error) => {
         console.log(error.errorMessage);
@@ -42,8 +45,15 @@ const Header = () => {
         navigate("/browse");
       } else {
         // User is signed out
-        dispatch(removeUser());
         navigate("/");
+        log(`No signed in users, trying to sign in anonymously...`);
+        signInAnonymously(auth)
+          .then((cred) => {
+            log(`Anonymous signin completed...`);
+          })
+          .catch((e) => {
+            log(`ERROR: ${e}`);
+          });
       }
     });
 
